@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -19,6 +19,7 @@
 package org.apache.myriad.scheduler;
 
 import org.apache.myriad.state.SchedulerState;
+
 import javax.inject.Inject;
 import java.util.Set;
 
@@ -33,29 +34,29 @@ import org.slf4j.LoggerFactory;
  * configured rules and policies.
  */
 public class Rebalancer implements Runnable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Rebalancer.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(Rebalancer.class);
 
-    private final SchedulerState schedulerState;
-    private final MyriadOperations myriadOperations;
-    private final ServiceProfileManager profileManager;
+  private final SchedulerState schedulerState;
+  private final MyriadOperations myriadOperations;
+  private final ServiceProfileManager profileManager;
 
-    @Inject
-    public Rebalancer(SchedulerState schedulerState,
-                      MyriadOperations myriadOperations,
-                      ServiceProfileManager profileManager) {
-        this.schedulerState = schedulerState;
-        this.myriadOperations = myriadOperations;
-        this.profileManager = profileManager;
+  @Inject
+  public Rebalancer(SchedulerState schedulerState,
+                    MyriadOperations myriadOperations,
+                    ServiceProfileManager profileManager) {
+    this.schedulerState = schedulerState;
+    this.myriadOperations = myriadOperations;
+    this.profileManager = profileManager;
+  }
+
+  @Override
+  public void run() {
+    final Set<Protos.TaskID> activeIds = schedulerState.getActiveTaskIds(NodeManagerConfiguration.NM_TASK_PREFIX);
+    final Set<Protos.TaskID> pendingIds = schedulerState.getPendingTaskIds(NodeManagerConfiguration.NM_TASK_PREFIX);
+    LOGGER.info("Active {}, Pending {}", activeIds.size(), pendingIds.size());
+    if (activeIds.size() < 1 && pendingIds.size() < 1) {
+      myriadOperations.flexUpCluster(profileManager.get("small"), 1, null);
     }
-
-    @Override
-    public void run() {
-      final Set<Protos.TaskID> activeIds = schedulerState.getActiveTaskIds(NodeManagerConfiguration.NM_TASK_PREFIX);
-      final Set<Protos.TaskID> pendingIds = schedulerState.getPendingTaskIds(NodeManagerConfiguration.NM_TASK_PREFIX);
-        LOGGER.info("Active {}, Pending {}", activeIds.size(), pendingIds.size());
-        if (activeIds.size() < 1 && pendingIds.size() < 1) {
-            myriadOperations.flexUpCluster(profileManager.get("small"), 1, null);
-        }
 //            RestAdapter restAdapter = new RestAdapter.Builder()
 //                    .setEndpoint("http://" + host + ":" + port)
 //                    .setLogLevel(LogLevel.FULL).build();
@@ -102,5 +103,5 @@ public class Rebalancer implements Runnable {
 //                LOGGER.info("Nothing to rebalance");
 //                this.schedulerState.releaseLock(clusterId);
 //            }
-    }
+  }
 }

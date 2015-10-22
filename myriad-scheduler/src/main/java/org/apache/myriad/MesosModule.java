@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -50,7 +50,7 @@ import com.google.protobuf.ByteString;
  */
 public class MesosModule extends AbstractModule {
   private static final Logger LOGGER = LoggerFactory.getLogger(
-      MesosModule.class);
+    MesosModule.class);
 
   public MesosModule() {
   }
@@ -63,9 +63,9 @@ public class MesosModule extends AbstractModule {
   @Provides
   @Singleton
   SchedulerDriver providesSchedulerDriver(
-      MyriadScheduler scheduler,
-      MyriadConfiguration cfg,
-      SchedulerState schedulerState) {
+    MyriadScheduler scheduler,
+    MyriadConfiguration cfg,
+    SchedulerState schedulerState) {
 
     Builder frameworkInfoBuilder = FrameworkInfo.newBuilder().setUser("")
       .setName(cfg.getFrameworkName())
@@ -90,9 +90,9 @@ public class MesosModule extends AbstractModule {
       Credential.Builder credentialBuilder = Credential.newBuilder();
       credentialBuilder.setPrincipal(mesosAuthenticationPrincipal);
       if (StringUtils.isNotEmpty(mesosAuthenticationSecretFilename)) {
-        try  {
+        try {
           credentialBuilder.setSecret(ByteString.readFrom(
-                new FileInputStream(mesosAuthenticationSecretFilename)));
+            new FileInputStream(mesosAuthenticationSecretFilename)));
         } catch (FileNotFoundException ex) {
           LOGGER.error("Mesos authentication secret file was not found", ex);
           throw new RuntimeException(ex);
@@ -102,10 +102,10 @@ public class MesosModule extends AbstractModule {
         }
       }
       return new MesosSchedulerDriver(scheduler, frameworkInfoBuilder.build(),
-          cfg.getMesosMaster(), credentialBuilder.build());
+        cfg.getMesosMaster(), credentialBuilder.build());
     } else {
       return new MesosSchedulerDriver(scheduler,
-          frameworkInfoBuilder.build(), cfg.getMesosMaster());
+        frameworkInfoBuilder.build(), cfg.getMesosMaster());
     }
   }
 
@@ -113,9 +113,9 @@ public class MesosModule extends AbstractModule {
   @Singleton
   State providesStateStore(MyriadConfiguration cfg) {
     return new ZooKeeperState(
-        cfg.getZkServers(),
-        cfg.getZkTimeout(),
-        TimeUnit.MILLISECONDS,
-        "/myriad/" + cfg.getFrameworkName());
+      cfg.getZkServers(),
+      cfg.getZkTimeout(),
+      TimeUnit.MILLISECONDS,
+      "/myriad/" + cfg.getFrameworkName());
   }
 }

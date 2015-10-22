@@ -1,8 +1,10 @@
 package org.apache.myriad.scheduler.constraints;
 
 import com.google.gson.Gson;
+
 import java.util.Collection;
 import java.util.regex.Pattern;
+
 import org.apache.mesos.Protos.Attribute;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +47,7 @@ public class LikeConstraint implements Constraint {
 
             default:
               LOGGER.warn("LIKE constraint currently doesn't support Mesos slave attributes " +
-                  "of type {}. Attribute Name: {}", attr.getType(), attr.getName());
+                "of type {}. Attribute Name: {}", attr.getType(), attr.getName());
               return false;
 
           }

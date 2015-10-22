@@ -12,8 +12,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
 /**
- * Resource Profile for any service 
- *
+ * Resource Profile for any service
  */
 public class ServiceResourceProfile {
 
@@ -30,11 +29,11 @@ public class ServiceResourceProfile {
   protected final Double memory;
 
   protected Double executorCpu = 0.0;
-  
+
   protected Double executorMemory = 0.0;
-  
+
   protected String className;
-    
+
   public ServiceResourceProfile(String name, Double cpu, Double mem) {
     this.name = name;
     this.cpus = cpu;
@@ -54,15 +53,15 @@ public class ServiceResourceProfile {
   public Double getMemory() {
     return memory;
   }
-  
+
   public Double getAggregateMemory() {
     return memory;
   }
-  
+
   public Double getAggregateCpu() {
     return cpus;
   }
-  
+
   public Double getExecutorCpu() {
     return executorCpu;
   }
@@ -82,22 +81,21 @@ public class ServiceResourceProfile {
 
   @Override
   public String toString() {
-      Gson gson = new Gson();
-      return gson.toJson(this);
+    Gson gson = new Gson();
+    return gson.toJson(this);
   }
-  
+
   /**
    * Custom serializer to help with deserialization of class hierarchy
-   * since at the point of deserialization we don't know class of the data 
+   * since at the point of deserialization we don't know class of the data
    * that is being deserialized
-   *
    */
   public static class CustomDeserializer implements JsonDeserializer<ServiceResourceProfile> {
     private static final Logger LOGGER = LoggerFactory.getLogger(CustomDeserializer.class);
-    
+
     @Override
     public ServiceResourceProfile deserialize(JsonElement json, Type typeOfT,
-        JsonDeserializationContext context) throws JsonParseException {
+                                              JsonDeserializationContext context) throws JsonParseException {
       String type = json.getAsJsonObject().get("className").getAsString();
       try {
         @SuppressWarnings("rawtypes")
@@ -112,6 +110,6 @@ public class ServiceResourceProfile {
       }
       return null;
     }
-    
+
   }
 }
