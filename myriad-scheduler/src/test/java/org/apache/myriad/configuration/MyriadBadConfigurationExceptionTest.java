@@ -40,7 +40,7 @@ public class MyriadBadConfigurationExceptionTest {
 
   @Test
   public void myriadExceptionTest() {
-    final String testStr = "MyriadBadConfigurationException: Bad configuration exception";
+    final String testStr = "org.apache.myriad.configuration.MyriadBadConfigurationException: Bad configuration exception";
     MyriadBadConfigurationException exp = new MyriadBadConfigurationException("Bad configuration exception");
     
     assertEquals(testStr, exp.toString());
