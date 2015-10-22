@@ -22,7 +22,7 @@ package org.apache.myriad.state;
 import org.apache.myriad.state.utils.StoreContext;
 
 /**
- * Interface implemented by all Myriad State Store implementations 
+ * Interface implemented by all Myriad State Store implementations
  */
 public interface MyriadStateStore {
 

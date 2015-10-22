@@ -40,10 +40,9 @@ import java.util.Map;
 /**
  * An interceptor that wraps other interceptors. The Myriad{Fair,Capacity,Fifo}Scheduler classes
  * instantiate this class and allow interception of the Yarn scheduler events/method calls.
- *
+ * <p/>
  * The {@link CompositeInterceptor} allows other interceptors to be registered via {@link InterceptorRegistry}
  * and passes control to the registered interceptors whenever a event/method call is being intercepted.
- *
  */
 public class CompositeInterceptor implements YarnSchedulerInterceptor, InterceptorRegistry {
   private static final Logger LOGGER = LoggerFactory.getLogger(CompositeInterceptor.class);

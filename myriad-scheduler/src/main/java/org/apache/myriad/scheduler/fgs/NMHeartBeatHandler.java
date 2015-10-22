@@ -107,12 +107,12 @@ public class NMHeartBeatHandler extends BaseInterceptor {
           totalCapability.setVirtualCores(0);
         }
       }
-      break;
+        break;
 
       case STATUS_UPDATE: {
         handleStatusUpdate(event, context);
       }
-      break;
+        break;
 
       default:
         break;

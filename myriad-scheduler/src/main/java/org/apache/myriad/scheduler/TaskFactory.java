@@ -246,7 +246,6 @@ public interface TaskFactory {
 
   /**
    * Implement NM Task Constraints
-   *
    */
   public static class NMTaskConstraints implements TaskConstraints {
 

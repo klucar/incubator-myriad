@@ -57,6 +57,7 @@ public final class StoreContext {
 
   /**
    * Accept all the SchedulerState maps and flatten them into lists of ByteBuffers
+   *
    * @param tasks
    * @param pendingTasks
    * @param stagingTasks
@@ -80,6 +81,7 @@ public final class StoreContext {
 
   /**
    * Accept list of ByteBuffers and re-create the SchedulerState maps.
+   *
    * @param framwrorkId
    * @param taskIds
    * @param taskNodes
@@ -106,6 +108,7 @@ public final class StoreContext {
 
   /**
    * Use this to gather bytes to push to the state store
+   *
    * @return byte stream of the state store context.
    * @throws IOException
    */
@@ -173,7 +176,7 @@ public final class StoreContext {
   }
 
   /**
-   * Serialize the Protos.FrameworkID into a ByteBuffer.  
+   * Serialize the Protos.FrameworkID into a ByteBuffer.
    */
   public void setFrameworkId(Protos.FrameworkID frameworkId) {
     if (frameworkId != null) {

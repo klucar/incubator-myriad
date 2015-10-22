@@ -27,7 +27,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 /**
- * Implementation assumes NM binaries will be downloaded 
+ * Implementation assumes NM binaries will be downloaded
  */
 public class DownloadNMExecutorCLGenImpl extends NMExecutorCLGenImpl {
 

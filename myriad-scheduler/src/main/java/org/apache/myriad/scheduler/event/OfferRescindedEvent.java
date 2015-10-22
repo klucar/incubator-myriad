@@ -22,7 +22,7 @@ import org.apache.mesos.Protos;
 import org.apache.mesos.SchedulerDriver;
 
 /**
- *  offer rescinded event
+ * offer rescinded event
  */
 public class OfferRescindedEvent {
   private SchedulerDriver driver;

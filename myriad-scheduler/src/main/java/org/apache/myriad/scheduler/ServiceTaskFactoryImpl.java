@@ -50,8 +50,7 @@ import com.google.common.annotations.VisibleForTesting;
  * 1. command to run
  * 2. Additional env. variables to set (serviceOpts)
  * 3. ports to use with names of the properties
- * 4. TODO (yufeldman) executor info 
- *
+ * 4. TODO (yufeldman) executor info
  */
 public class ServiceTaskFactoryImpl implements TaskFactory {
   private static final Logger LOGGER = LoggerFactory.getLogger(ServiceTaskFactoryImpl.class);
@@ -233,6 +232,7 @@ public class ServiceTaskFactoryImpl implements TaskFactory {
 
   /**
    * Helper method to reserve ports
+   *
    * @param offer
    * @param requestedPorts
    * @return

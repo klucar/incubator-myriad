@@ -67,7 +67,8 @@ public class LeastAMNodesFirstPolicy extends BaseInterceptor implements NodeScal
   }
 
   /**
-   *  Sort the given list of tasks by the number of App Master containers running on the corresponding NM node.
+   * Sort the given list of tasks by the number of App Master containers running on the corresponding NM node.
+   *
    * @param taskIDs
    */
   @Override

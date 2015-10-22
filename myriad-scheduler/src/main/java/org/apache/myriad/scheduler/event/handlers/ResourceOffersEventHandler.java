@@ -6,9 +6,9 @@
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
- * 
- *     http://www.apache.org/licenses/LICENSE-2.0
- * 
+ * <p/>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p/>
  * Unless required by applicable law or agreed to in writing,
  * software distributed under the License is distributed on an
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -75,7 +75,7 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
 
   @Inject
   private OfferLifecycleManager offerLifecycleMgr;
-  
+
   @Inject
   private TaskConstraintsManager taskConstraintsManager;
 
@@ -99,7 +99,7 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
     LOGGER.debug("Pending tasks: {}", this.schedulerState.getPendingTaskIds());
     driverOperationLock.lock();
     try {
-      for (Iterator<Offer> iterator = offers.iterator(); iterator.hasNext();) {
+      for (Iterator<Offer> iterator = offers.iterator(); iterator.hasNext(); ) {
         Offer offer = iterator.next();
         Set<NodeTask> nodeTasks = schedulerState.getNodeTasks(offer.getSlaveId());
         for (NodeTask nodeTask : nodeTasks) {
@@ -109,7 +109,7 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
         if (CollectionUtils.isNotEmpty(pendingTasks)) {
           for (Protos.TaskID pendingTaskId : pendingTasks) {
             NodeTask taskToLaunch = schedulerState
-                .getTask(pendingTaskId);
+              .getTask(pendingTaskId);
             String taskPrefix = taskToLaunch.getTaskPrefix();
             ServiceResourceProfile profile = taskToLaunch.getProfile();
             Constraint constraint = taskToLaunch.getConstraint();
@@ -119,11 +119,11 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
             launchedTasks.addAll(schedulerState.getStagingTasksByType(taskPrefix));
 
             if (matches(offer, taskToLaunch, constraint)
-                && SchedulerUtils.isUniqueHostname(offer, taskToLaunch, launchedTasks)) {
+              && SchedulerUtils.isUniqueHostname(offer, taskToLaunch, launchedTasks)) {
               try {
-                final TaskInfo task = 
-                      taskFactoryMap.get(taskPrefix).createTask(offer, schedulerState.getFrameworkID(), pendingTaskId,
-                      taskToLaunch);
+                final TaskInfo task =
+                  taskFactoryMap.get(taskPrefix).createTask(offer, schedulerState.getFrameworkID(), pendingTaskId,
+                    taskToLaunch);
                 List<OfferID> offerIds = new ArrayList<>();
                 offerIds.add(offer.getId());
                 List<TaskInfo> tasks = new ArrayList<>();
@@ -132,7 +132,7 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
                 LOGGER.debug("Launching task: {} with profile: {} using offer: {}", task, profile, offer);
                 driver.launchTasks(offerIds, tasks);
                 schedulerState.makeTaskStaging(pendingTaskId);
-  
+
                 // For every NM Task that we launch, we currently
                 // need to backup the ExecutorInfo for that NM Task in the State Store.
                 // Without this, we will not be able to launch tasks corresponding to yarn
@@ -155,7 +155,7 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
         if (SchedulerUtils.isEligibleForFineGrainedScaling(offer.getHostname(), schedulerState)) {
           if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Picking an offer from slave with hostname {} for fine grained scaling.",
-                offer.getHostname());
+              offer.getHostname());
           }
           offerLifecycleMgr.addOffers(offer);
         } else {
@@ -181,7 +181,7 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
         resourceEvaluators.get(resource.getName()).eval(resource, results);
       } else {
         LOGGER.warn("Ignoring unknown resource type: {}",
-            resource.getName());
+          resource.getName());
       }
     }
     double cpus = (Double) results.get("cpus");
@@ -195,28 +195,27 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
     return checkAggregates(offer, taskToLaunch, ports, cpus, mem);
   }
 
-    private boolean checkAggregates(Offer offer, NodeTask taskToLaunch, int ports, double cpus, double mem) {
-        final ServiceResourceProfile profile = taskToLaunch.getProfile();
-        final String taskPrefix = taskToLaunch.getTaskPrefix();
-        final double aggrCpu = profile.getAggregateCpu() + profile.getExecutorCpu();
-        final double aggrMem = profile.getAggregateMemory() + profile.getExecutorMemory();
-        final TaskConstraints taskConstraints = taskConstraintsManager.getConstraints(taskPrefix);
-        if (aggrCpu <= cpus
-            && aggrMem <= mem
-            && taskConstraints.portsCount() <= ports) {
-            return true;
-        } else {
-            LOGGER.info("Offer not sufficient for task with, cpu: {}, memory: {}, ports: {}",
-                aggrCpu, aggrMem, ports);
-            return false;
-        }
+  private boolean checkAggregates(Offer offer, NodeTask taskToLaunch, int ports, double cpus, double mem) {
+    final ServiceResourceProfile profile = taskToLaunch.getProfile();
+    final String taskPrefix = taskToLaunch.getTaskPrefix();
+    final double aggrCpu = profile.getAggregateCpu() + profile.getExecutorCpu();
+    final double aggrMem = profile.getAggregateMemory() + profile.getExecutorMemory();
+    final TaskConstraints taskConstraints = taskConstraintsManager.getConstraints(taskPrefix);
+    if (aggrCpu <= cpus
+      && aggrMem <= mem
+      && taskConstraints.portsCount() <= ports) {
+      return true;
+    } else {
+      LOGGER.info("Offer not sufficient for task with, cpu: {}, memory: {}, ports: {}",
+        aggrCpu, aggrMem, ports);
+      return false;
     }
+  }
 
   private boolean meetsConstraint(Offer offer, Constraint constraint) {
     if (constraint != null) {
       switch (constraint.getType()) {
-        case LIKE:
-        {
+        case LIKE: {
           LikeConstraint likeConstraint = (LikeConstraint) constraint;
           if (likeConstraint.isConstraintOnHostName()) {
             return likeConstraint.matchesHostName(offer.getHostname());
@@ -224,8 +223,8 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
             return likeConstraint.matchesSlaveAttributes(offer.getAttributesList());
           }
         }
-      default:
-        return false;
+        default:
+          return false;
       }
     }
     return true;
@@ -243,13 +242,13 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
       value = new Double(resource.getScalar().getValue());
     } else {
       LOGGER.error(id + " resource was not a scalar: {}", resource
-          .getType().toString());
+        .getType().toString());
     }
     return value;
   }
 
   private interface EvalResources {
-    public void eval(Resource resource, Map<String, Object>results);
+    public void eval(Resource resource, Map<String, Object> results);
   }
 
   private static Map<String, EvalResources> resourceEvaluators;
@@ -283,7 +282,7 @@ public class ResourceOffersEventHandler implements EventHandler<ResourceOffersEv
 
         } else {
           LOGGER.error("ports resource was not Ranges: {}", resource
-              .getType().toString());
+            .getType().toString());
 
         }
         results.put("ports", Integer.valueOf(ports));

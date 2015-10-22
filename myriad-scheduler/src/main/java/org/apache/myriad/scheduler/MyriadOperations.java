@@ -96,6 +96,7 @@ public class MyriadOperations {
 
   /**
    * Flexup a service
+   *
    * @param instances
    * @param serviceName
    */
@@ -131,8 +132,9 @@ public class MyriadOperations {
 
   /**
    * Flexing down any service defined in the configuration
+   *
    * @param numInstancesToScaleDown
-   * @param serviceName - name of the service
+   * @param serviceName             - name of the service
    */
   public void flexDownAService(int numInstancesToScaleDown, String serviceName) {
     LOGGER.info("About to flex down {} instances of {}", numInstancesToScaleDown, serviceName);

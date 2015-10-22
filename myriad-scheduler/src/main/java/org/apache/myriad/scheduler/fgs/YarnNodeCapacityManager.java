@@ -57,7 +57,7 @@ import org.slf4j.LoggerFactory;
  * Manages the capacity exposed by NodeManager. It uses the offers available
  * from Mesos to inflate the node capacity and lets ResourceManager make the
  * scheduling decision. After the scheduling decision is done, there are 2 cases:
- *
+ * <p/>
  * 1. If ResourceManager did not use the expanded capacity, then the node's
  * capacity is reverted back to original value and the offer is declined.
  * 2. If ResourceManager ended up using the expanded capacity, then the node's
@@ -123,7 +123,7 @@ public class YarnNodeCapacityManager extends BaseInterceptor {
         nodeStore.add(node);
         LOGGER.info("afterSchedulerEventHandled: NM registration from node {}", host);
       }
-      break;
+        break;
 
       case NODE_UPDATE: {
         if (!(event instanceof NodeUpdateSchedulerEvent)) {
@@ -135,7 +135,7 @@ public class YarnNodeCapacityManager extends BaseInterceptor {
         RMNode rmNode = ((NodeUpdateSchedulerEvent) event).getRMNode();
         handleContainerAllocation(rmNode);
       }
-      break;
+        break;
 
       default:
         break;
@@ -203,7 +203,7 @@ public class YarnNodeCapacityManager extends BaseInterceptor {
   /**
    * 1. Updates {@link RMNode#getTotalCapability()} with newCapacity.
    * 2. Sends out a {@link NodeResourceUpdateSchedulerEvent} that's handled by YARN's scheduler.
-   *    The scheduler updates the corresponding {@link SchedulerNode} with the newCapacity.
+   * The scheduler updates the corresponding {@link SchedulerNode} with the newCapacity.
    *
    * @param rmNode
    * @param newCapacity

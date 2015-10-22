@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Implementation assumes NM binaries already deployed 
+ * Implementation assumes NM binaries already deployed
  */
 public class NMExecutorCLGenImpl implements ExecutorCommandLineGenerator {
 

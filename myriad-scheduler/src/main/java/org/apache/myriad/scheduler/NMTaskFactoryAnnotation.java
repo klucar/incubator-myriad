@@ -30,7 +30,6 @@ import static java.lang.annotation.ElementType.METHOD;
 
 /**
  * NMTaskFactory annotation that allows to bind TaskFactory to NM specific implementation
- *
  */
 @BindingAnnotation
 @Target({FIELD, PARAMETER, METHOD})

@@ -27,6 +27,7 @@ public interface TaskConstraints {
 
   /**
    * Required number of ports
+   *
    * @return portsNumber
    */
   public int portsCount();

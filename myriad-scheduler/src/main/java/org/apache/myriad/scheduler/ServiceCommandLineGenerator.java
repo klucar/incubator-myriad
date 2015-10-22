@@ -21,7 +21,6 @@ import org.apache.myriad.configuration.MyriadConfiguration;
 
 /**
  * CommandLineGenerator for any aux service launched by Myriad as binary distro
- *
  */
 public class ServiceCommandLineGenerator extends DownloadNMExecutorCLGenImpl {
 

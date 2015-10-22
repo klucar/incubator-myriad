@@ -441,7 +441,6 @@ public class SchedulerState {
 
   /**
    * Class to keep all the tasks states for a particular taskPrefix together
-   *
    */
   private static class SchedulerStateForType {
 
@@ -550,7 +549,6 @@ public class SchedulerState {
 
   /**
    * TaskState type
-   *
    */
   public enum TaskState {
     PENDING,

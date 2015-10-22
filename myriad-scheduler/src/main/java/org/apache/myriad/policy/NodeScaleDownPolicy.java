@@ -29,6 +29,7 @@ public interface NodeScaleDownPolicy {
 
   /**
    * Apply a scale down policy to the given list of taskIDs.
+   *
    * @param taskIDs
    */
   public void apply(List<Protos.TaskID> taskIDs);

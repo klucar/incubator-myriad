@@ -29,7 +29,6 @@ import com.google.common.base.Optional;
 
 /**
  * Configuration for any service/task to be started from Myriad Scheduler
- *
  */
 public class ServiceConfiguration {
 
@@ -46,7 +45,7 @@ public class ServiceConfiguration {
   protected Double jvmMaxMemoryMB;
 
   /**
-   * Amount of CPU share given to  JVM. 
+   * Amount of CPU share given to  JVM.
    */
   @JsonProperty
   protected Double cpus;

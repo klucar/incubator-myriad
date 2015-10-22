@@ -62,7 +62,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Main entry point for myriad scheduler
- *
  */
 public class Main {
   private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
@@ -218,6 +217,7 @@ public class Main {
 
   /**
    * Create ServiceProfile for any configured service
+   *
    * @param cfg
    * @param injector
    */
@@ -273,6 +273,7 @@ public class Main {
 
   /**
    * Start tasks for configured services
+   *
    * @param injector
    */
   private void startJavaBasedTaskInstance(Injector injector) {

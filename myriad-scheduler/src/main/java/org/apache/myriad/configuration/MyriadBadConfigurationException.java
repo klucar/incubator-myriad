@@ -20,7 +20,6 @@ package org.apache.myriad.configuration;
 
 /**
  * Myriad specific exception
- *
  */
 @SuppressWarnings("serial")
 public class MyriadBadConfigurationException extends Exception {

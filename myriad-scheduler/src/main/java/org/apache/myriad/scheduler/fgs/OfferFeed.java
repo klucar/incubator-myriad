@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.apache.mesos.Protos;
 
 /**
- * Feed of Mesos offers for a node. 
+ * Feed of Mesos offers for a node.
  */
 public class OfferFeed {
   private ConcurrentLinkedQueue<Protos.Offer> queue;
